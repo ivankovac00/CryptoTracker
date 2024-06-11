@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 
-SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:lozinka@localhost:3306/crypto_db'
+SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:lozinka@mysql-fastapi:3306/crypto_db'
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

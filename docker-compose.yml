@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  up2024:
+    build: .
+    container_name: upravljanjepodacima
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - bpnet
+    restart: always
+
+  redis:
+    image: redis
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - bpnet
+
+  mysql:
+    image: mysql
+    container_name: mysql-fastapi
+    environment:
+      - MYSQL_DATABASE=crypto_db
+      - MYSQL_ROOT_PASSWORD=lozinka
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - bpnet
+
+volumes:
+  mysql:
+
+networks:
+  bpnet:
+    driver: bridge
